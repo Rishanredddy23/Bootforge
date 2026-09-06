@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>BOOTFORGE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div class="brand">
+        <b>⬡</b>
+        <div><strong>BOOTFORGE</strong><small>Boot. Build. Automate.</small></div>
+      </div>
+      <div class="devices">
+        <button id="storage-select" title="VM Storage Folder & Virtual Disks">📁 <span id="storage-label">VM Storage ⌄</span></button>
+        <button id="device-select">▣ &nbsp; USB / External SSD / ISO⌄</button>
+        <button id="drive-select" disabled>No device selected ⌄</button>
+        <span id="device-status"><i></i>Disconnected</span>
+      </div>
+      <div class="actions">
+        <button id="power-btn" title="Power">⌁ Power⌄</button>
+        <button id="snapshot-btn" title="Snapshot">▣ Snapshot</button>
+        <button id="settings-btn" title="Settings">⚙ Settings</button>
+        <button id="minimize-btn" title="Minimize" class="window-control">−</button>
+        <button id="maximize-btn" title="Maximize" class="window-control">□</button>
+        <button id="close-btn" title="Close" class="window-control">×</button>
+      </div>
+    </header>
+    <div class="body">
+      <aside>
+        <nav>
+          <button class="nav active" data-page="home">⌂<small>Home</small></button>
+          <button class="nav" data-page="prompts">▤<small>Prompts</small></button>
+          <button class="nav" data-page="files">▱<small>Files</small></button>
+          <button class="nav" data-page="tools">⚒<small>Tools</small></button>
+          <button class="nav" data-page="logs">▤<small>Logs</small></button>
+          <button class="nav" data-page="settings">⚙<small>Settings</small></button>
+        </nav>
+        <div class="side-bottom">
+          <section id="ai-section">
+            <b>LOCAL AI <i id="ai-status-indicator"></i></b>
+            <p><em id="ai-connection-status">●</em> <span id="ai-provider-name">Ollama</span></p>
+            <small>Model: <span id="ai-model-name">Nemotron-3-8B</span></small>
+            <button id="model-btn">Change Model</button>
+          </section>
+          <section>
+            <b>SYSTEM RESOURCES</b>
+            <label>CPU <span id="cpu">14%</span></label><u><i style="width:14%"></i></u>
+            <label>RAM <span id="ram">42%</span></label><u><i style="width:42%"></i></u>
+            <label>VRAM <span id="vram">28%</span></label><u><i style="width:28%"></i></u>
+            <label>Disk <span id="disk">18%</span></label><u><i style="width:18%"></i></u>
+          </section>
+          <small class="version">v1.0.0 • <span id="host-status">Host Ready</span></small>
+        </div>
+      </aside>
+      <section id="dashboard" class="dashboard">
+        <section class="panel ai">
+          <header>
+            <div>
+              <h2>◈　AI Assistant <small id="ai-mode-badge">(Local)</small></h2>
+              <p>Your local coding & automation assistant</p>
+            </div>
+            <span>⚙　⛶</span>
+          </header>
+          <div class="chat" id="chat">
+            <article class="system">
+              Welcome to BootForge. Select a boot device and start the VM to begin.
+              <time>Just now</time>
+            </article>
+          </div>
+          <form id="chat-form">
+            <div>
+              <textarea id="chat-input" placeholder="Ask anything... (e.g., build an app, automate a task)" rows="3"></textarea>
+              <button type="submit">➤</button>
+            </div>
+            <footer>
+              <button type="button" id="attach-file-btn">⌕　Attach File</button>
+              <button type="button" id="code-btn">⌘　Code</button>
+              <button type="button" id="run-command-btn">▣　Run Command</button>
+              <button type="button" id="more-btn">☷</button>
+            </footer>
+          </form>
+        </section>
+        <section class="panel vm">
+          <header>
+            <h2><strong>⊞</strong>　Windows Sandbox　 <em id="vm-run-status">● Stopped</em></h2>
+            <div>
+              <button id="fullscreen-btn">⛶　Full Screen</button>
+              <button id="ctrlaltdel-btn">⌘　Ctrl+Alt+Del</button>
+              <button id="input-btn">↗　Input⌄</button>
+              <button id="vm-menu-btn">⋮</button>
+            </div>
+          </header>
+          <div class="screen" id="vm-screen">
+            <div class="vm-placeholder">
+              <div class="vm-icon">⊞</div>
+              <p>Windows VM not running</p>
+              <small>Click "Start Sandbox" or "Power" to boot into Windows</small>
+            </div>
+          </div>
+          <footer class="status">
+            <span><i id="vm-status-indicator"></i>Status: <b id="vm-status">Stopped</b></span>
+            <span>CPU: <b id="vm-cpu">0%</b><u><i style="width:0%"></i></u></span>
+            <span>RAM: <b id="vm-ram">0 GB / 8 GB</b><u class="purple"><i style="width:0%"></i></u></span>
+            <span>Disk: <b id="vm-disk">0 GB / 100 GB</b><u class="green"><i style="width:0%"></i></u></span>
+            <button id="stop-btn">▶　Start Sandbox</button>
+          </footer>
+        </section>
+      </section>
+      <section id="page" class="page hidden"></section>
+    </div>
+  </main>
+  <div id="modal" class="overlay hidden">
+    <div class="modal">
+      <button id="modal-close">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

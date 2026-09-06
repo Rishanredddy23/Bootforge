@@ -1,0 +1,56 @@
+{
+  "name": "bootforge",
+  "version": "1.0.0",
+  "description": "BootForge - AI-powered portable VM workstation",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "lint": "eslint electron/ renderer/ --ext .js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "electron",
+    "vm",
+    "virtualization",
+    "ai",
+    "windows"
+  ],
+  "author": "BootForge",
+  "license": "MIT",
+  "dependencies": {
+    "@novnc/novnc": "^1.7.0",
+    "electron-store": "^8.1.0",
+    "keytar": "^7.9.0",
+    "node-pty": "^1.0.0",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "eslint": "^8.56.0"
+  },
+  "build": {
+    "appId": "com.bootforge.app",
+    "productName": "BootForge",
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "agent/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "renderer/assets/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
